@@ -8,18 +8,18 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class BedwarsPlugin extends JavaPlugin {
-    BedwarsSetup setup = new BedwarsSetup();
+    BedwarsGame game = new BedwarsGame();
 
     @Override
     public void onEnable() {
         getLogger().info("BedwarsPlugin enabled!");
         // Events
         Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(), this);
-        Bukkit.getPluginManager().registerEvents(new BedBreakListener(setup), this);
-        Bukkit.getPluginManager().registerEvents(new SpawnerTickListener(setup), this);
+        Bukkit.getPluginManager().registerEvents(new BedBreakListener(game.getSetup()), this);
+        Bukkit.getPluginManager().registerEvents(new SpawnerTickListener(game), this);
 
         // Commands
-        BedwarsAdminCommand bwaCmd = new BedwarsAdminCommand(setup);
+        BedwarsAdminCommand bwaCmd = new BedwarsAdminCommand(game);
         registerCommand(BedwarsAdminCommand.CMD_NAME, bwaCmd);
     }
 

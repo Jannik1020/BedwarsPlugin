@@ -1,5 +1,6 @@
 package de.thieles.bedwarsplugin.commands;
 
+import de.thieles.bedwarsplugin.BedwarsGame;
 import de.thieles.bedwarsplugin.BedwarsSetup;
 import io.papermc.paper.command.brigadier.BasicCommand;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
@@ -7,20 +8,21 @@ import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.type.Bed;
 import org.bukkit.entity.Player;
+import org.jspecify.annotations.NonNull;
 
 import java.util.Arrays;
 import java.util.Objects;
 
 public class BedwarsAdminCommand implements BasicCommand {
-    private final BedwarsSetup setup;
+    private final BedwarsGame game;
 
-    public BedwarsAdminCommand(BedwarsSetup setup) {
-        this.setup = setup;
+    public BedwarsAdminCommand(BedwarsGame game) {
+        this.game = game;
     }
 
     public static final String CMD_NAME = "bwa";
     @Override
-    public void execute(CommandSourceStack src, String[] args) {
+    public void execute(@NonNull CommandSourceStack src, String[] args) {
         if(args.length == 1) {
             if (Objects.equals(args[0], "setbed")) {
                 if (src.getExecutor() instanceof Player player) {
@@ -41,7 +43,7 @@ public class BedwarsAdminCommand implements BasicCommand {
                                 : block.getRelative(bed.getFacing().getOppositeFace());
 
                         BedwarsSetup.TeamBed teamBed = new BedwarsSetup.TeamBed(head, foot);
-                        setup.addTeamBed(teamBed);
+                        game.getSetup().addTeamBed(teamBed);
 
                     } else {
                         src.getSender().sendMessage("Target block is not a bed");
@@ -49,10 +51,10 @@ public class BedwarsAdminCommand implements BasicCommand {
                 }
             }
             else if(Objects.equals(args[0], "pause")) {
-                setup.setPaused(true);
+                game.setItemSpawnsPaused(true);
             }
             else if(Objects.equals(args[0], "resume")) {
-                setup.setPaused(false);
+                game.setItemSpawnsPaused(false);
             }
             else {
                 printUsage(src);
@@ -69,12 +71,12 @@ public class BedwarsAdminCommand implements BasicCommand {
                     BlockData data = block.getBlockData();
 
                     BedwarsSetup.SpawnerTier.fromTag(args[1]).ifPresentOrElse(
-                            tier -> setup.addSpawnerBlock(new BedwarsSetup.SpawnerBlock(block, tier)),
+                            tier -> game.getSetup().addSpawnerBlock(new BedwarsSetup.SpawnerBlock(block, tier)),
                             () -> src.getSender().sendMessage("Usage: /bwa setblock [iron | gold | diamond | emerald")
 
                     );
 
-                    System.out.println(Arrays.toString(setup.getSpawnerBlocks().toArray()));
+                    System.out.println(Arrays.toString(game.getSetup().getSpawnerBlocks().toArray()));
                 } else {
                     printUsage(src);
                 }
