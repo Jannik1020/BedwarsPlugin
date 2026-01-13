@@ -45,7 +45,7 @@ public final class BedwarsPlugin extends JavaPlugin {
         Location locFoot = bedFoot.getLocation();
         Location locHead = bedHead.getLocation();
 
-        cfg.set(path + ".world", locFoot.getWorld());
+        cfg.set(path + ".world", locFoot.getWorld().getName());
         cfg.set(path + ".footX", locFoot.getBlockX());
         cfg.set(path + ".footY", locFoot.getBlockY());
         cfg.set(path + ".footZ", locFoot.getBlockZ());
