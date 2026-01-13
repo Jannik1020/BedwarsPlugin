@@ -37,7 +37,7 @@ public class BedwarsSetup {
         this.paused = paused;
     }
 
-    public record TeamBed (Block head, Block foot) {
+    public record TeamBed (Block head, Block foot, String teamIdent) {
         public boolean isBlockOfBed(Block block) {
             if(block.getBlockData() instanceof Bed bed) {
                 return block.getLocation().equals(head.getLocation())
