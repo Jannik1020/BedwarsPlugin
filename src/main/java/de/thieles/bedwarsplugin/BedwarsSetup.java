@@ -43,17 +43,19 @@ public class BedwarsSetup {
     }
 
     public enum SpawnerTier {
-        IRON("iron", Material.IRON_INGOT),
-        GOLD("gold", Material.GOLD_INGOT),
-        DIAMOND("diamond", Material.DIAMOND),
-        EMERALD("emerald", Material.EMERALD);
+        IRON("iron", Material.IRON_INGOT, 40), // 2s
+        GOLD("gold", Material.GOLD_INGOT, 160),  //8s
+        DIAMOND("diamond", Material.DIAMOND, 160 * 4), //8s
+        EMERALD("emerald", Material.EMERALD, 160 * 4 * 4); //16s
 
         private final String tagName;
         private final Material item;
+        private final int ticksBetweenSpawn;
 
-        SpawnerTier(String tagName, Material item) {
+        SpawnerTier(String tagName, Material item, int tickBetweenSpawn) {
             this.tagName = tagName;
             this.item = item;
+            this.ticksBetweenSpawn = tickBetweenSpawn;
         }
 
         public String getTagName() {
@@ -62,6 +64,10 @@ public class BedwarsSetup {
 
         public Material getItem() {
             return item;
+        }
+
+        public int getTicksBetweenSpawn() {
+            return ticksBetweenSpawn;
         }
 
         public static Optional<SpawnerTier> fromTag(String tag) {
