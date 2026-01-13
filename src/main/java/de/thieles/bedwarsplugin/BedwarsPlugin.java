@@ -47,8 +47,8 @@ public final class BedwarsPlugin extends JavaPlugin {
 
         cfg.set(path + ".world", locFoot.getWorld());
         cfg.set(path + ".footX", locFoot.getBlockX());
-        cfg.set(path + ".footY", locFoot.getBlockX());
-        cfg.set(path + ".footZ", locFoot.getBlockX());
+        cfg.set(path + ".footY", locFoot.getBlockY());
+        cfg.set(path + ".footZ", locFoot.getBlockZ());
         cfg.set(path + ".headX", locHead.getBlockX());
         cfg.set(path + ".headZ", locHead.getBlockZ());
 
@@ -62,7 +62,7 @@ public final class BedwarsPlugin extends JavaPlugin {
     }
 
     private void saveSpawnerBlocks(List<BedwarsSetup.SpawnerBlock> blocks, FileConfiguration cfg) {
-        String path = "spawners.";
+        String path = "spawners";
         List<Map<String, Object>> spawnerList = new ArrayList<>();
 
         for (BedwarsSetup.SpawnerBlock spawner : blocks) {
