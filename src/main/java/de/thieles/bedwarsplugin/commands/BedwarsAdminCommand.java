@@ -47,7 +47,14 @@ public class BedwarsAdminCommand implements BasicCommand {
                         src.getSender().sendMessage("Target block is not a bed");
                     }
                 }
-            } else {
+            }
+            else if(Objects.equals(args[0], "pause")) {
+                setup.setPaused(true);
+            }
+            else if(Objects.equals(args[0], "resume")) {
+                setup.setPaused(false);
+            }
+            else {
                 printUsage(src);
             }
         }
