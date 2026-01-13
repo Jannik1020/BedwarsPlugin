@@ -13,6 +13,7 @@ import java.util.Optional;
 public class BedwarsSetup {
     private final List<TeamBed> teamBeds = new ArrayList<>();
     private final List<SpawnerBlock> spawnerBlocks = new ArrayList<>();
+    private boolean paused = false;
 
     public List<TeamBed> getTeamBeds() {
         return teamBeds;
@@ -26,6 +27,14 @@ public class BedwarsSetup {
     }
     public void addSpawnerBlock(SpawnerBlock block) {
         spawnerBlocks.add(block);
+    }
+
+    public boolean isPaused() {
+        return paused;
+    }
+
+    public void setPaused(boolean paused) {
+        this.paused = paused;
     }
 
     public record TeamBed (Block head, Block foot) {

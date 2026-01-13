@@ -21,6 +21,7 @@ public class SpawnerTickListener implements Listener {
 
     @EventHandler
     public void onServerTick(ServerTickStartEvent event) {
+        if(setup.isPaused()) return;
         setup.getSpawnerBlocks().forEach(spawnerBlock -> {
             if(event.getTickNumber() % spawnerBlock.tier().getTicksBetweenSpawn() == 0) {
                 Item item = spawnerBlock.block().getWorld().dropItem(
