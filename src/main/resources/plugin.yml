@@ -1,0 +1,4 @@
+name: BedwarsPlugin
+version: '1.0-SNAPSHOT'
+main: de.thieles.bedwarsplugin.BedwarsPlugin
+api-version: '1.21'
