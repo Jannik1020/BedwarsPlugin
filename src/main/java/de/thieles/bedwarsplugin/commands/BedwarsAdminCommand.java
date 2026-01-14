@@ -37,6 +37,9 @@ public class BedwarsAdminCommand implements BasicCommand {
             else if(Objects.equals(args[0], "save")) {
                 plugin.saveBedwarsConfig();
             }
+            else if(Objects.equals(args[0], "load")) {
+                plugin.loadBedwarsConfig();
+            }
         } else if(args.length == 2) {
             if (Objects.equals(args[0], "setblock")) {
                 if (src.getExecutor() instanceof Player player) {
